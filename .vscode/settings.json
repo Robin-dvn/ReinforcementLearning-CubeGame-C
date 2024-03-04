@@ -1,0 +1,18 @@
+{
+    "files.associations": {
+        "Makefile": "makefile",
+        "stdio.h": "c",
+        "vecteur.h": "c",
+        "categorical.h": "c",
+        "map.h": "c",
+        "reinforcement.h": "c",
+        "player.h": "c",
+        "sdl_ttf.h": "c",
+        "constantes.h": "c",
+        "math.h": "c",
+        "xutility": "c",
+        "windows.h": "c",
+        "import_engine.h": "c"
+    },
+    "C_Cpp.errorSquiggles": "disabled"
+}
