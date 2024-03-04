@@ -26,7 +26,7 @@ int main (int argc, char **argv)
 
     char ** maps;
     maps = calloc(9,sizeof(char *));
-    int nb_map=0;
+    int nb_map=1;
     char map1[300] = "../src/maps/map1.txt";
     maps[0]=map1;
     char map2[300] = "../src/maps/map2.txt";
@@ -62,7 +62,7 @@ int main (int argc, char **argv)
     charger_numeros(renderer,&textures_a_free,window);
  
     //gestion du mode
-    SDL_bool RL = SDL_FALSE;
+    SDL_bool RL = SDL_TRUE;
 
     if(TTF_Init()<0)
     {
@@ -84,7 +84,7 @@ int main (int argc, char **argv)
     texte_mode.color= textColor;
     texte_mode.font = font;
     texte_mode.texturee = texture_mode;
-    strcpy(texte_mode.text,"Mode Manuel, pour passer en apprentissage appuyer sur R ");
+    strcpy(texte_mode.text,"Mode Apprentissage, pour passer en manuel appuyer sur M ");
     // gestion des paramètres du modèle
     SDL_Texture * texture_params;
     Text texte_param;
@@ -173,7 +173,8 @@ int main (int argc, char **argv)
         SDL_RenderPresent(renderer);
     }
     
-
+    TTF_CloseFont(font);
+    TTF_Quit();
     free(textures_a_free);
     free(maps);
     SDL_DestroyTexture(texture_menu);
