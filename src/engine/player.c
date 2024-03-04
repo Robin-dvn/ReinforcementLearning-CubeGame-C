@@ -173,7 +173,7 @@ void update_pos(Player *player,Map*map)
     Uint32 current = SDL_GetTicks();
     float dt = (current - player->last_time)/1000.;
     player->last_time = current;
-    printf("dt %f\n",dt);
+    
     if((player->surSol || player->auSol) && player->vitesse.x !=0)
     {
         

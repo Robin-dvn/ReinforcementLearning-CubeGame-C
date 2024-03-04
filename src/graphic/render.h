@@ -8,7 +8,7 @@
 typedef struct{
     TTF_Font * font;
     SDL_Color color;
-    char text[40];
+    char text[300];
     SDL_Texture * texturee;
 }Text;
 
@@ -23,6 +23,7 @@ void jouer(SDL_Window *window,SDL_Renderer * renderer,SDL_Texture * texture_menu
 void charger_numeros(SDL_Renderer *renderer,SDL_Texture *** textures, SDL_Window * window);
 void render_map_number(SDL_Renderer  *renderer,int nb_map, SDL_Texture *** textures);
 void render_temps(SDL_Renderer * renderer, SDL_Window *window, Text * text );
+void render_mode(SDL_Renderer * renderer, SDL_Window *window, Text * text );
 void  * myTurn(void *);
 void yourturn();
 #endif

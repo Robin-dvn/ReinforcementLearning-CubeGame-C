@@ -63,6 +63,28 @@ int main (int argc, char **argv)
  
     //gestion du mode
     SDL_bool RL = SDL_FALSE;
+
+    if(TTF_Init()<0)
+    {
+        printf("Impossible d'ouvrir le ttf : %s",TTF_GetError());
+    }
+    
+    TTF_Font *font = TTF_OpenFont("../src/fonts/Roboto-Medium.ttf",20);
+    if(!font)
+    {
+        printf("watf");
+    }
+        
+    SDL_Color textColor;
+    textColor.r=255;
+    textColor.g=255;
+    textColor.b=255;
+    SDL_Texture *  texture_mode;
+    Text texte_mode;
+    texte_mode.color= textColor;
+    texte_mode.font = font;
+    texte_mode.texturee = texture_mode;
+    strcpy(texte_mode.text,"Mode Manuel, pour passer en apprentissage appuyer sur R ");
     // Boucle infini
     SDL_bool lauched = SDL_TRUE;
     while(lauched)
@@ -102,9 +124,11 @@ int main (int argc, char **argv)
                 case SDLK_r:
                     RL = SDL_TRUE;
                     printf("mode: RL");
+                    strcpy(texte_mode.text,"Mode Apprentissage, pour passer en manuel appuyer sur M ");
                     break;
                 case SDLK_m:
                     RL = SDL_FALSE;
+                    strcpy(texte_mode.text,"Mode Manuel, pour passer en apprentissage appuyer sur R ");
                     printf("MODE: MANU");
                     break;
                 default:
@@ -123,6 +147,7 @@ int main (int argc, char **argv)
         SDL_RenderCopy(renderer,texture_menu,NULL,&rectangle_menu);
         
         render_map_number(renderer,nb_map,&textures_a_free);
+        render_mode(renderer,window,&texte_mode);
         SDL_RenderPresent(renderer);
     }
     
@@ -130,6 +155,7 @@ int main (int argc, char **argv)
     free(textures_a_free);
     free(maps);
     SDL_DestroyTexture(texture_menu);
+    SDL_DestroyTexture(texte_mode.texturee);
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     SDL_Quit();

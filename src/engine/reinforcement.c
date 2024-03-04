@@ -66,6 +66,7 @@ Data_step  * step(int  * action,Env *env)
     
     for (int i = 0; i < NB_PLAYERS; i++)
     {
+        printf("joueur n%d",i);
         if (env->liste_players[i]->enjeu)
         {
             if(env->liste_players[i]->num_frame %5==0)
@@ -112,13 +113,19 @@ Data_step  * step(int  * action,Env *env)
                 
             if(temps_de_jeu > TEMPS)
             {
-                for (int i = 0; i < NB_PLAYERS; i++)
-                {
-                    env->liste_players[i]->enjeu = SDL_FALSE;
-                }
+                
+                env->liste_players[i]->enjeu =SDL_FALSE;
+                data[i].truncated=SDL_TRUE;
+
                 
                 
-                hors_temps =SDL_TRUE;
+                
+                hors_temps = SDL_TRUE;
+                printf("temps fini");
+                
+                strcat(texte_temps.text," ");  
+                
+                render_temps(env->renderer,env->window, &texte_temps);
             }    
             else
             {
@@ -157,7 +164,12 @@ Data_step  * step(int  * action,Env *env)
             
             Vecf  * newstate =NULL;
             
-            newstate= getStateFromPlayer(env,temps_de_jeu,i);
+            if(hors_temps){
+                newstate= getStateFromPlayer(env,TEMPS,i);
+            }else{
+                newstate= getStateFromPlayer(env,temps_de_jeu,i);
+            }
+            
             data[i].new_state = newstate;
             
             end =SDL_GetTicks();
@@ -169,14 +181,21 @@ Data_step  * step(int  * action,Env *env)
             
         
             env->liste_players[i]->num_frame =env->liste_players[i]->num_frame+1;
+
+            
+            
         }else{
+            
             data[i].truncated = SDL_TRUE;
             data[i].fini = SDL_FALSE;
         }
+
+        
         
         
     }
-   
+    
+    
     renderBackground(env->renderer,env->window,env->textures_a_free,env->rect_menu);
     render_map(env->renderer,env->map,WINDOW_HEIGHT/CUBE-SOL_HEIGHT/CUBE,WINDOW_WIDTH/CUBE,env->textures_a_free);
     afficher_sol(env->renderer,env->textures_a_free);
@@ -185,12 +204,15 @@ Data_step  * step(int  * action,Env *env)
     {
         if (env->liste_players[i]->enjeu)
         {
+            
             render_player(env->liste_players[i],env->renderer,env->textures_a_free);
         }
         
         
     }
     
+    
+
     int end =  SDL_GetTicks();
     float temps_de_jeu = end-env->time_debut;
     SDL_bool hors_temps=SDL_FALSE;
@@ -200,22 +222,39 @@ Data_step  * step(int  * action,Env *env)
     
     strcpy(texte_temps.text," ");
     char temps_restant_char[3];
-    int temps_restant = (int) floor(TEMPS-temps_de_jeu)/1000 +1;
-    sprintf(temps_restant_char,"%d",temps_restant);
-    strcat(texte_temps.text,temps_restant_char);
-      
-    render_temps(env->renderer,env->window, &texte_temps);
+    if(temps_de_jeu<=TEMPS){
+        int temps_restant = (int) floor(TEMPS-temps_de_jeu)/1000 +1;
+        sprintf(temps_restant_char,"%d",temps_restant);
+        strcat(texte_temps.text,temps_restant_char);
+        render_temps(env->renderer,env->window, &texte_temps);
+    }else{
+        // for (int i = 0; i < NB_PLAYERS; i++)
+        //     {
+        //         env->liste_players[i]->enjeu =SDL_FALSE;
+        //         data[i].truncated=SDL_TRUE;
+        //         printf("%d ,",i);
+
+        //     }
+        //     printf("\n");
+        strcat(texte_temps.text," ");  
+                
+        render_temps(env->renderer,env->window, &texte_temps);
+          
+    }
+    
 
     
 
     SDL_RenderPresent(env->renderer);
     SDL_DestroyTexture(texte_temps.texturee);
     
-    if ((int)floor(FPS - env->liste_players[NB_PLAYERS-1]->eTime)>0)
-        {
+    
+    if ((int)floor(FPS - env->liste_players[NB_PLAYERS-1]->eTime)>0)  
+    {
             
-            SDL_Delay((int)floor(FPS - env->liste_players[NB_PLAYERS-1]->eTime));
-        }
+        SDL_Delay((int)floor(FPS - env->liste_players[NB_PLAYERS-1]->eTime));
+    }
+    
     
    
     return data;

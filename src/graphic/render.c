@@ -80,10 +80,11 @@ void jouer(SDL_Window *window,SDL_Renderer * renderer,SDL_Texture * texture_menu
         ADAMoptimizer * adam=NULL;
         adam = INNIT_ADAMoptimizer(policy,0.01,0.00000001,0.9,0.999);
         importer_momentum(policy,"../src/policy_params/moment1.txt");
+        printf("avant episode");
         
         for (int ep = 0; ep < 10; ep++) //boucle des épisodes
         {
-            
+            printf("debut episode");
             reset(env);
             
             for (int i = 0; i < NB_PLAYERS; i++)
@@ -158,50 +159,89 @@ void jouer(SDL_Window *window,SDL_Renderer * renderer,SDL_Texture * texture_menu
                 data = step(actions,env);
                
 
-                
-                
-        
-                for (int i = 0; i < NB_PLAYERS; i++)
-                {
-                    if (env->liste_players[i]->enjeu)
-                    {
-                        APPEND_ListeInt(actions[i],&(env->liste_players[i]->actions));
-                        APPEND_ListeFloat(probs[i]->vec[actions[i]],&(env->liste_players[i]->probs));
-                        APPEND_listeVecf(*(data[i].new_state),&(env->liste_players[i]->states));
-                        APPEND_ListeFloat(data[i].reward,&(env->liste_players[i]->rewards));
-                    }else if(env->liste_players[i]->a_modif)
-                    {
-                        APPEND_ListeInt(actions[i],&(env->liste_players[i]->actions));
-                        APPEND_ListeFloat(probs[i]->vec[actions[i]],&(env->liste_players[i]->probs));
-                        APPEND_listeVecf(*(data[i].new_state),&(env->liste_players[i]->states));
-                        APPEND_ListeFloat(data[i].reward,&(env->liste_players[i]->rewards));
-                        env->liste_players[i]->a_modif =SDL_FALSE;
-                    }
-                    
-                    
-                    
-                    FREE_Vecf(probs[i]);
-                    free(probs[i]);
-                    probs[i]=NULL;
-                    FREE_Vecf(transition[i]);
-                    free(transition[i]);
-                    transition[i] =NULL;
-                }
-                
                 done = SDL_TRUE;
+                
                 for (int i = 0; i < NB_PLAYERS; i++)
                 {
+
                     if (!(data[i].fini || data[i].truncated))
                     {
+                        
                         done =SDL_FALSE;
                     }
                     
                 }
+
+                if(done){
+                    printf("done\n");
+                    SDL_Delay(1000);
+                }
+                
+        
+                for (int j = 0; j < NB_PLAYERS; j++)
+                {
+                    printf("boucle : %d\n",j);
+                    if (env->liste_players[j]->enjeu)
+                    {
+                        APPEND_ListeInt(actions[j],&(env->liste_players[j]->actions));
+                        APPEND_ListeFloat(probs[j]->vec[actions[j]],&(env->liste_players[j]->probs));
+                        APPEND_listeVecf(*(data[j].new_state),&(env->liste_players[j]->states));
+                        APPEND_ListeFloat(data[j].reward,&(env->liste_players[j]->rewards));
+                        if(done){
+                            printf("wtf%d\n",j);
+                            
+                        }
+                        
+
+                    }else if(env->liste_players[j]->a_modif)
+                    {
+                        
+                        APPEND_ListeInt(actions[j],&(env->liste_players[j]->actions));
+                        if(done){
+                            printf("int%d\n",j);
+                            
+                        }
+                        APPEND_ListeFloat(probs[j]->vec[actions[j]],&(env->liste_players[j]->probs));
+                        if(done){
+                            printf("float%d\n",j);
+                            
+                        }
+                        
+                        Vecf vec = *(data[j].new_state);
+                        
+                        APPEND_listeVecf(*(data[j].new_state),&(env->liste_players[j]->states));
+                        if(done){
+                            printf("vecf%d\n",j);
+                            
+                        }
+                        APPEND_ListeFloat(data[j].reward,&(env->liste_players[j]->rewards));
+                        env->liste_players[j]->a_modif =SDL_FALSE;
+                        if(done){
+                            printf("%d\n",j);
+                            
+                        }
+
+                    }else{
+                        printf("le dernier else:%d\n",j);
+                    }
+                    
+                    
+                    
+                    FREE_Vecf(probs[j]);
+                    free(probs[j]);
+                    probs[j]=NULL;
+                    FREE_Vecf(transition[j]);
+                    free(transition[j]);
+                    transition[j] =NULL;
+                }
+                
+                
                 
 
             
                 
             }
+            printf("apres le done");
             for (int i = 0; i < NB_PLAYERS; i++)
             {
                 APPEND_ListeFloat(env->liste_players[i]->max_x,&posx);
@@ -283,14 +323,15 @@ void jouer(SDL_Window *window,SDL_Renderer * renderer,SDL_Texture * texture_menu
                 
             }
             
-            
+            printf("fin episode");
             
 
         }
         // PRINT_Matrice(policy->layers[policy->nb_layers-2].weights);
         // PRINT_Vecf(policy->layers[policy->nb_layers-2].biases);
+        printf("avant sauv params");
         sauvegarder_params(policy,"../src/policy_params/sauv4.txt");
-         
+        
         sauvegarder_momentum(policy,"../src/policy_params/moment1.txt");
         printf("La moyenne du max de x est : %f\n", moyenne_list_float(posx));
         printf("La moyenne de la loss est : %f\n", moyenne_list_float(listeLoss));
@@ -725,6 +766,24 @@ void render_temps(SDL_Renderer * renderer, SDL_Window *window, Text * text )
     
     
     SDL_FreeSurface(surface_temps);
+    SDL_QueryTexture(text->texturee,NULL,NULL,NULL,NULL);
+    SDL_RenderCopy(renderer,text->texturee,NULL,&rect);
+
+}
+
+void render_mode(SDL_Renderer * renderer, SDL_Window *window, Text * text )
+{
+    SDL_Surface  * surface_mode = TTF_RenderText_Solid(text->font,text->text,text->color);
+    
+    if(surface_mode == NULL) SDL_ExitWithErrorGraphic("Impossible de mettre image mode",window,renderer);
+    text->texturee = SDL_CreateTextureFromSurface(renderer,surface_mode);
+    if(text->texturee== NULL) SDL_ExitWithErrorGraphic("Impossible de mettre texture t",window,renderer);
+    SDL_QueryTexture(text->texturee,NULL,NULL,NULL,NULL);
+    SDL_Rect rect ={500,500,surface_mode->w,surface_mode->h};
+    rect.x =WINDOW_WIDTH/2-surface_mode->w/2;
+    
+    
+    SDL_FreeSurface(surface_mode);
     SDL_QueryTexture(text->texturee,NULL,NULL,NULL,NULL);
     SDL_RenderCopy(renderer,text->texturee,NULL,&rect);
 

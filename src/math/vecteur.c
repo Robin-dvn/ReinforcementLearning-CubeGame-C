@@ -294,13 +294,16 @@ int getListFloatLength(ListeFloat* head) {
 
 ListeVecf * INNIT_listeVecf(Vecf premier_vec) {
     ListeVecf* l = NULL;
+    
     l = malloc(sizeof(ListeVecf));
+    
     l->valeur = premier_vec;
     l->next = NULL;
     return l;
 }
 
 void APPEND_listeVecf(Vecf vec, ListeVecf** l) {
+    
     ListeVecf* newVec = INNIT_listeVecf(vec);
 
     if (*l == NULL) {
@@ -316,7 +319,7 @@ void APPEND_listeVecf(Vecf vec, ListeVecf** l) {
             next = next->next;
             id = next->id;
         }
-    
+        
         next->next = newVec;
         newVec->id = id + 1;
     }
