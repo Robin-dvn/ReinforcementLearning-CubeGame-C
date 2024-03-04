@@ -127,6 +127,7 @@ Data_step  * step(int  * action,Env *env)
                 int temps_restant = (int) floor(TEMPS-temps_de_jeu)/1000 +1;
                 sprintf(temps_restant_char,"%d",temps_restant);
                 strcat(texte_temps.text,temps_restant_char);  
+                
                 render_temps(env->renderer,env->window, &texte_temps);
             } 
                 
@@ -201,7 +202,8 @@ Data_step  * step(int  * action,Env *env)
     char temps_restant_char[3];
     int temps_restant = (int) floor(TEMPS-temps_de_jeu)/1000 +1;
     sprintf(temps_restant_char,"%d",temps_restant);
-    strcat(texte_temps.text,temps_restant_char);  
+    strcat(texte_temps.text,temps_restant_char);
+      
     render_temps(env->renderer,env->window, &texte_temps);
 
     
@@ -230,7 +232,7 @@ Env *  create_env(SDL_Renderer *renderer, SDL_Window * window,SDL_Texture * text
     env->textures_a_free=textures_a_free;
     env->window=window;
     env->time_debut= SDL_GetTicks();
-    TTF_Font *font = TTF_OpenFont("C:/Users/Daven/Documents/Projets/2d/jeu1/src/fonts/Roboto-Medium.ttf",35);
+    TTF_Font *font = TTF_OpenFont("../src/fonts/Roboto-Medium.ttf",35);
     env->font =font;
 
 

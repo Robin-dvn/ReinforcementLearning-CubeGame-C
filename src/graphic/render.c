@@ -33,11 +33,10 @@ void yourturn()
     
 }
 
-void jouer(SDL_Window *window,SDL_Renderer * renderer,SDL_Texture * texture_menu, SDL_Rect rect_menu, SDL_Texture *** textures_a_free, char *map_chemin)
+void jouer(SDL_Window *window,SDL_Renderer * renderer,SDL_Texture * texture_menu, SDL_Rect rect_menu, SDL_Texture *** textures_a_free, char *map_chemin,SDL_bool RL)
 {
 
-    SDL_bool Rl;
-    Rl = SDL_FALSE;
+    
 
     SDL_bool jeu_classique;
     jeu_classique = SDL_FALSE;
@@ -47,7 +46,7 @@ void jouer(SDL_Window *window,SDL_Renderer * renderer,SDL_Texture * texture_menu
     
     
 
-    if(Rl )
+    if(RL)
     {
 
         
@@ -323,6 +322,7 @@ void jouer(SDL_Window *window,SDL_Renderer * renderer,SDL_Texture * texture_menu
         {
             printf("watf");
         }
+        printf("watf");
         SDL_Color textColor;
         textColor.r=255;
         textColor.g=255;
@@ -554,7 +554,7 @@ SDL_Texture * renderBackground(SDL_Renderer *renderer, SDL_Window *window, SDL_T
 void create_player(Player *joueur,SDL_Renderer * renderer,SDL_Window *window, SDL_Texture ***textures)
 {
     SDL_Surface  * surface_joueur = IMG_Load("../src/images/cube.png");
-    if(surface_joueur == NULL) SDL_ExitWithErrorGraphic("Impossible de mettre image",window,renderer);
+    if(surface_joueur == NULL) SDL_ExitWithErrorGraphic("Impossible de mettre image c",window,renderer);
     SDL_Texture * texture_joueur = SDL_CreateTextureFromSurface(renderer,surface_joueur);
     if(texture_joueur == NULL) SDL_ExitWithErrorGraphic("Impossible de mettre texture",window,renderer);
    
@@ -584,7 +584,7 @@ void charger_textures(SDL_Renderer *renderer, SDL_Window *window, SDL_Texture **
     SDL_Texture *texture_menu_2;
     SDL_Surface * surface_menu  = NULL;
     surface_menu = IMG_Load("../src/images/fond.png");
-    if (surface_menu == NULL) SDL_ExitWithError("Impossible de mettre l'image sur la surface");
+    if (surface_menu == NULL) SDL_ExitWithError("Impossible de mettre l'image sur la surface ");
     texture_menu_2 = SDL_CreateTextureFromSurface(renderer,surface_menu);
     if(texture_menu_2 == NULL) SDL_ExitWithError("Impossible de mettre la surface sur la texture");
     
@@ -594,37 +594,37 @@ void charger_textures(SDL_Renderer *renderer, SDL_Window *window, SDL_Texture **
 
 
     SDL_Surface  * surface_sol = IMG_Load("../src/images/sol.png");
-    if(surface_sol == NULL) SDL_ExitWithErrorGraphic("Impossible de mettre image",window,renderer);
+    if(surface_sol == NULL) SDL_ExitWithErrorGraphic("Impossible de mettre image s",window,renderer);
     SDL_Texture * texture_sol = SDL_CreateTextureFromSurface(renderer,surface_sol);
-    if(texture_sol == NULL) SDL_ExitWithErrorGraphic("Impossible de mettre texture",window,renderer);
+    if(texture_sol == NULL) SDL_ExitWithErrorGraphic("Impossible de mettre texture s",window,renderer);
     SDL_QueryTexture(texture_sol,NULL,NULL,NULL,NULL);
     (*textures)[3]= texture_sol;
     SDL_FreeSurface(surface_sol);
 
 
     SDL_Surface  * surface_pique = IMG_Load("../src/images/pique.png");
-    if(surface_pique == NULL) SDL_ExitWithErrorGraphic("Impossible de mettre image",window,renderer);
+    if(surface_pique == NULL) SDL_ExitWithErrorGraphic("Impossible de mettre image p",window,renderer);
     SDL_Texture * texture_pique = SDL_CreateTextureFromSurface(renderer,surface_pique);
-    if(texture_pique == NULL) SDL_ExitWithErrorGraphic("Impossible de mettre texture",window,renderer);
+    if(texture_pique == NULL) SDL_ExitWithErrorGraphic("Impossible de mettre texture p",window,renderer);
     SDL_QueryTexture(texture_pique,NULL,NULL,NULL,NULL);
     (*textures)[0]= texture_pique;
    
     SDL_FreeSurface(surface_pique);
 
     SDL_Surface  * surface_pique_inv = IMG_Load("../src/images/pique_inverse.png");
-    if(surface_pique_inv == NULL) SDL_ExitWithErrorGraphic("Impossible de mettre image",window,renderer);
+    if(surface_pique_inv == NULL) SDL_ExitWithErrorGraphic("Impossible de mettre image pi",window,renderer);
     SDL_Texture * texture_pique_inv = SDL_CreateTextureFromSurface(renderer,surface_pique_inv);
-    if(texture_pique_inv == NULL) SDL_ExitWithErrorGraphic("Impossible de mettre texture",window,renderer);
+    if(texture_pique_inv == NULL) SDL_ExitWithErrorGraphic("Impossible de mettre texture p",window,renderer);
     SDL_QueryTexture(texture_pique_inv,NULL,NULL,NULL,NULL);
     (*textures)[1]= texture_pique_inv;
    
     SDL_FreeSurface(surface_pique_inv);
 
     SDL_Surface  * surface_solide_1 = IMG_Load("../src/images/solide1.png");
-    if(surface_solide_1 == NULL) SDL_ExitWithErrorGraphic("Impossible de mettre image",window,renderer);
+    if(surface_solide_1 == NULL) SDL_ExitWithErrorGraphic("Impossible de mettre image s1",window,renderer);
     SDL_Texture * texture_solide_1 = SDL_CreateTextureFromSurface(renderer,surface_solide_1);
     
-    if(texture_solide_1 == NULL) SDL_ExitWithErrorGraphic("Impossible de mettre texture",window,renderer);
+    if(texture_solide_1 == NULL) SDL_ExitWithErrorGraphic("Impossible de mettre texture s1",window,renderer);
     SDL_QueryTexture(texture_solide_1,NULL,NULL,NULL,NULL);
     (*textures)[4]= texture_solide_1;
     SDL_FreeSurface(surface_solide_1);
@@ -680,33 +680,33 @@ void render_map_number(SDL_Renderer  *renderer,int nb_map, SDL_Texture *** textu
 void charger_numeros(SDL_Renderer *renderer,SDL_Texture *** textures, SDL_Window * window)
 {
     SDL_Surface  * surface_1 = IMG_Load("../src/images/1.png");
-    if(surface_1 == NULL) SDL_ExitWithErrorGraphic("Impossible de mettre image",window,renderer);
+    if(surface_1 == NULL) SDL_ExitWithErrorGraphic("Impossible de mettre image 1",window,renderer);
     SDL_Texture * texture_1 = SDL_CreateTextureFromSurface(renderer,surface_1);
-    if(texture_1 == NULL) SDL_ExitWithErrorGraphic("Impossible de mettre texture",window,renderer);
+    if(texture_1 == NULL) SDL_ExitWithErrorGraphic("Impossible de mettre texture 1",window,renderer);
     SDL_QueryTexture(texture_1,NULL,NULL,NULL,NULL);
     (*textures)[6]= texture_1;
     SDL_FreeSurface(surface_1);
     
     SDL_Surface  * surface_2 = IMG_Load("../src/images/2.png");
-    if(surface_2 == NULL) SDL_ExitWithErrorGraphic("Impossible de mettre image",window,renderer);
+    if(surface_2 == NULL) SDL_ExitWithErrorGraphic("Impossible de mettre image 2",window,renderer);
     SDL_Texture * texture_2 = SDL_CreateTextureFromSurface(renderer,surface_2);
-    if(texture_2 == NULL) SDL_ExitWithErrorGraphic("Impossible de mettre texture",window,renderer);
+    if(texture_2 == NULL) SDL_ExitWithErrorGraphic("Impossible de mettre texture 2",window,renderer);
     SDL_QueryTexture(texture_2,NULL,NULL,NULL,NULL);
     (*textures)[7]= texture_2;
     SDL_FreeSurface(surface_2);
 
     SDL_Surface  * surface_3 = IMG_Load("../src/images/3.png");
-    if(surface_3 == NULL) SDL_ExitWithErrorGraphic("Impossible de mettre image",window,renderer);
+    if(surface_3 == NULL) SDL_ExitWithErrorGraphic("Impossible de mettre image 3",window,renderer);
     SDL_Texture * texture_3 = SDL_CreateTextureFromSurface(renderer,surface_3);
-    if(texture_3 == NULL) SDL_ExitWithErrorGraphic("Impossible de mettre texture",window,renderer);
+    if(texture_3 == NULL) SDL_ExitWithErrorGraphic("Impossible de mettre texture 3",window,renderer);
     SDL_QueryTexture(texture_3,NULL,NULL,NULL,NULL);
     (*textures)[8]= texture_3;
     SDL_FreeSurface(surface_3);
 
     SDL_Surface  * surface_4 = IMG_Load("../src/images/4.png");
-    if(surface_4 == NULL) SDL_ExitWithErrorGraphic("Impossible de mettre image",window,renderer);
+    if(surface_4 == NULL) SDL_ExitWithErrorGraphic("Impossible de mettre image 4",window,renderer);
     SDL_Texture * texture_4 = SDL_CreateTextureFromSurface(renderer,surface_4);
-    if(texture_4 == NULL) SDL_ExitWithErrorGraphic("Impossible de mettre texture",window,renderer);
+    if(texture_4 == NULL) SDL_ExitWithErrorGraphic("Impossible de mettre texture 4",window,renderer);
     SDL_QueryTexture(texture_4,NULL,NULL,NULL,NULL);
     (*textures)[9]= texture_4;
     SDL_FreeSurface(surface_4);
@@ -715,9 +715,10 @@ void charger_numeros(SDL_Renderer *renderer,SDL_Texture *** textures, SDL_Window
 void render_temps(SDL_Renderer * renderer, SDL_Window *window, Text * text )
 {
     SDL_Surface  * surface_temps = TTF_RenderText_Solid(text->font,text->text,text->color);
-    if(surface_temps == NULL) SDL_ExitWithErrorGraphic("Impossible de mettre image",window,renderer);
+    
+    if(surface_temps == NULL) SDL_ExitWithErrorGraphic("Impossible de mettre image t",window,renderer);
     text->texturee = SDL_CreateTextureFromSurface(renderer,surface_temps);
-    if(text->texturee== NULL) SDL_ExitWithErrorGraphic("Impossible de mettre texture",window,renderer);
+    if(text->texturee== NULL) SDL_ExitWithErrorGraphic("Impossible de mettre texture t",window,renderer);
     SDL_QueryTexture(text->texturee,NULL,NULL,NULL,NULL);
     SDL_Rect rect ={500,500,surface_temps->w,surface_temps->h};
     rect.x =WINDOW_WIDTH/2-surface_temps->w/2;

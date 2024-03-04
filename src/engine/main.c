@@ -61,6 +61,8 @@ int main (int argc, char **argv)
     textures_a_free = calloc(NB_Text,sizeof( SDL_Texture *));
     charger_numeros(renderer,&textures_a_free,window);
  
+    //gestion du mode
+    SDL_bool RL = SDL_FALSE;
     // Boucle infini
     SDL_bool lauched = SDL_TRUE;
     while(lauched)
@@ -74,7 +76,7 @@ int main (int argc, char **argv)
                 switch (event.key.keysym.sym)
                 {
                 case SDLK_SPACE:
-                    jouer(window,renderer,texture_menu,rectangle_menu,&textures_a_free, maps[nb_map]);
+                    jouer(window,renderer,texture_menu,rectangle_menu,&textures_a_free, maps[nb_map],RL);
                     if(SDL_RenderCopy(renderer,texture_menu,NULL,&rectangle_menu) !=0) SDL_ExitWithErrorGraphic("Impossible d'afficher'",window,renderer);
                     SDL_RenderPresent(renderer);
                     
@@ -97,6 +99,14 @@ int main (int argc, char **argv)
                     nb_map =3;
                     printf("ok");
                     break;
+                case SDLK_r:
+                    RL = SDL_TRUE;
+                    printf("mode: RL");
+                    break;
+                case SDLK_m:
+                    RL = SDL_FALSE;
+                    printf("MODE: MANU");
+                    break;
                 default:
                     break;
                 }
@@ -109,6 +119,7 @@ int main (int argc, char **argv)
                 break;
             }
         }
+        
         SDL_RenderCopy(renderer,texture_menu,NULL,&rectangle_menu);
         
         render_map_number(renderer,nb_map,&textures_a_free);
