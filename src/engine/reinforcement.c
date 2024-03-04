@@ -66,7 +66,7 @@ Data_step  * step(int  * action,Env *env)
     
     for (int i = 0; i < NB_PLAYERS; i++)
     {
-        printf("joueur n%d",i);
+        
         if (env->liste_players[i]->enjeu)
         {
             if(env->liste_players[i]->num_frame %5==0)
@@ -121,7 +121,7 @@ Data_step  * step(int  * action,Env *env)
                 
                 
                 hors_temps = SDL_TRUE;
-                printf("temps fini");
+               
                 
                 strcat(texte_temps.text," ");  
                 

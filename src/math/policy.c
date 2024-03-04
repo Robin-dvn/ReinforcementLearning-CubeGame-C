@@ -61,7 +61,9 @@ float dtanh_activation(Data d)
 }
 
 
-
+float relu_activation(Data d) {
+    return d.x1 > 0 ? d.x1 : 0;
+}
 
 float softmax_activation(Data data) {
     return (exp(data.x1)/data.x2);

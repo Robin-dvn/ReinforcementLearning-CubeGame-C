@@ -85,6 +85,14 @@ int main (int argc, char **argv)
     texte_mode.font = font;
     texte_mode.texturee = texture_mode;
     strcpy(texte_mode.text,"Mode Manuel, pour passer en apprentissage appuyer sur R ");
+    // gestion des paramètres du modèle
+    SDL_Texture * texture_params;
+    Text texte_param;
+    texte_param.color = textColor;
+    texte_param.font = font;
+    texte_param.texturee = texture_params;
+    strcpy(texte_param.text,"Pour reset les parametres du modele appuyer sur 0");
+
     // Boucle infini
     SDL_bool lauched = SDL_TRUE;
     while(lauched)
@@ -107,6 +115,19 @@ int main (int argc, char **argv)
                     break;
                 case SDLK_ESCAPE:
                     lauched = SDL_FALSE;
+                    break;
+                case SDLK_0:
+                    FILE *file = fopen("../src/policy_params/sauv4.txt", "w");
+                    FILE *file2 = fopen("../src/policy_params/moment1.txt", "w");
+    
+                    if (file == NULL) {
+                        printf("Error opening file");
+                        
+                    }
+
+                    // Close the file
+                    fclose(file);
+                    fclose(file2);
                     break;
                 case SDLK_1:
                     nb_map =0;
@@ -147,7 +168,8 @@ int main (int argc, char **argv)
         SDL_RenderCopy(renderer,texture_menu,NULL,&rectangle_menu);
         
         render_map_number(renderer,nb_map,&textures_a_free);
-        render_mode(renderer,window,&texte_mode);
+        render_texte(renderer,window,&texte_mode,500);
+        render_texte(renderer,window,&texte_param,550);
         SDL_RenderPresent(renderer);
     }
     
@@ -156,6 +178,7 @@ int main (int argc, char **argv)
     free(maps);
     SDL_DestroyTexture(texture_menu);
     SDL_DestroyTexture(texte_mode.texturee);
+    SDL_DestroyTexture(texte_param.texturee);
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     SDL_Quit();

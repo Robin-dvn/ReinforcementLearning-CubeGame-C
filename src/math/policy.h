@@ -19,6 +19,7 @@ float softmax_activation(Data d);
 Policy_CNN * INIT_CNN(int nb_layers, int nb_neuron_layer);
 void back_propagation(Policy_CNN * policy, float loss_value,int action, Vecf * input);
 float dtanh_activation(Data d);
+float relu_activation(Data d);
 
 
 void sauvegarder_params(Policy_CNN * policy, char * dest);

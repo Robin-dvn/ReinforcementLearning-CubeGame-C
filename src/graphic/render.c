@@ -80,11 +80,11 @@ void jouer(SDL_Window *window,SDL_Renderer * renderer,SDL_Texture * texture_menu
         ADAMoptimizer * adam=NULL;
         adam = INNIT_ADAMoptimizer(policy,0.01,0.00000001,0.9,0.999);
         importer_momentum(policy,"../src/policy_params/moment1.txt");
-        printf("avant episode");
+
         
         for (int ep = 0; ep < 10; ep++) //boucle des épisodes
         {
-            printf("debut episode");
+
             reset(env);
             
             for (int i = 0; i < NB_PLAYERS; i++)
@@ -172,57 +172,28 @@ void jouer(SDL_Window *window,SDL_Renderer * renderer,SDL_Texture * texture_menu
                     
                 }
 
-                if(done){
-                    printf("done\n");
-                    SDL_Delay(1000);
-                }
-                
         
                 for (int j = 0; j < NB_PLAYERS; j++)
                 {
-                    printf("boucle : %d\n",j);
+
                     if (env->liste_players[j]->enjeu)
                     {
                         APPEND_ListeInt(actions[j],&(env->liste_players[j]->actions));
                         APPEND_ListeFloat(probs[j]->vec[actions[j]],&(env->liste_players[j]->probs));
                         APPEND_listeVecf(*(data[j].new_state),&(env->liste_players[j]->states));
                         APPEND_ListeFloat(data[j].reward,&(env->liste_players[j]->rewards));
-                        if(done){
-                            printf("wtf%d\n",j);
-                            
-                        }
                         
 
                     }else if(env->liste_players[j]->a_modif)
                     {
                         
                         APPEND_ListeInt(actions[j],&(env->liste_players[j]->actions));
-                        if(done){
-                            printf("int%d\n",j);
-                            
-                        }
                         APPEND_ListeFloat(probs[j]->vec[actions[j]],&(env->liste_players[j]->probs));
-                        if(done){
-                            printf("float%d\n",j);
-                            
-                        }
-                        
                         Vecf vec = *(data[j].new_state);
                         
                         APPEND_listeVecf(*(data[j].new_state),&(env->liste_players[j]->states));
-                        if(done){
-                            printf("vecf%d\n",j);
-                            
-                        }
                         APPEND_ListeFloat(data[j].reward,&(env->liste_players[j]->rewards));
                         env->liste_players[j]->a_modif =SDL_FALSE;
-                        if(done){
-                            printf("%d\n",j);
-                            
-                        }
-
-                    }else{
-                        printf("le dernier else:%d\n",j);
                     }
                     
                     
@@ -363,14 +334,14 @@ void jouer(SDL_Window *window,SDL_Renderer * renderer,SDL_Texture * texture_menu
         {
             printf("watf");
         }
-        printf("watf");
+
         SDL_Color textColor;
         textColor.r=255;
         textColor.g=255;
         textColor.b=255;
         SDL_Texture *  texture_temps;
         Text texte_temps;
-        printf("ici");
+
         texte_temps.color= textColor;
         texte_temps.font = font;
         texte_temps.texturee = texture_temps;
@@ -771,7 +742,7 @@ void render_temps(SDL_Renderer * renderer, SDL_Window *window, Text * text )
 
 }
 
-void render_mode(SDL_Renderer * renderer, SDL_Window *window, Text * text )
+void render_texte(SDL_Renderer * renderer, SDL_Window *window, Text * text ,float recty)
 {
     SDL_Surface  * surface_mode = TTF_RenderText_Solid(text->font,text->text,text->color);
     
@@ -781,6 +752,7 @@ void render_mode(SDL_Renderer * renderer, SDL_Window *window, Text * text )
     SDL_QueryTexture(text->texturee,NULL,NULL,NULL,NULL);
     SDL_Rect rect ={500,500,surface_mode->w,surface_mode->h};
     rect.x =WINDOW_WIDTH/2-surface_mode->w/2;
+    rect.y = recty;
     
     
     SDL_FreeSurface(surface_mode);
