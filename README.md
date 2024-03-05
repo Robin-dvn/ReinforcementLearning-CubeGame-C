@@ -104,3 +104,13 @@ NB 2: En mode apprentissage, le jeu est codé pour faire 10 essais, il revient e
 
 NB 3: Il est possible que le jeu crash tout de même, si c'est le cas, les weights ne sont pas perdu et il sufit de relancer le jeu.exe et de continuer l'apprentissage.
 
+## Améliorations et critiques
+
+Voici les points qui sont à améliorer:
+- meilleur structure de code
+- meilleur modèle pour l'agent
+- un système de reward plus intéligent
+- meilleur visualisation des résultats (metrics)
+
+Mon manque d'expérience et de théorie fait qu'il ya beaucoup de point à revoir. Surtout sur l'analyse du réseau de neuronnes et la théorie mathématique derrière l'apprentissage agent-environnement.
+
