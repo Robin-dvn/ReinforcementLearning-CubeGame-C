@@ -493,11 +493,11 @@ void jouer(SDL_Window *window,SDL_Renderer * renderer,SDL_Texture * texture_menu
                 
             
                 
-                render_temps(renderer,window, &texte_temps);
+                //render_temps(renderer,window, &texte_temps);
             } 
 
             SDL_RenderPresent(renderer);
-            if(player.enjeu)SDL_DestroyTexture(texte_temps.texturee);
+            //if(player.enjeu)SDL_DestroyTexture(texte_temps.texturee);
             end =SDL_GetTicks();
             player.eTime =(end-start) ;
 

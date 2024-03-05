@@ -49,12 +49,12 @@ Data_step  * step(int  * action,Env *env)
     textColor.r=255;
     textColor.g=255;
     textColor.b=255;
-    SDL_Texture *  texture_temps;
+    //SDL_Texture *  texture_temps;
     Text texte_temps;
     
     texte_temps.color= textColor;
     texte_temps.font = env->font;
-    texte_temps.texturee = texture_temps;
+    //texte_temps.texturee = texture_temps;
     
     Data_step  *data= NULL;
     data = calloc(NB_PLAYERS, sizeof (Data_step));
@@ -125,7 +125,7 @@ Data_step  * step(int  * action,Env *env)
                 
                 strcat(texte_temps.text," ");  
                 
-                render_temps(env->renderer,env->window, &texte_temps);
+                //render_temps(env->renderer,env->window, &texte_temps);
             }    
             else
             {
@@ -135,7 +135,7 @@ Data_step  * step(int  * action,Env *env)
                 sprintf(temps_restant_char,"%d",temps_restant);
                 strcat(texte_temps.text,temps_restant_char);  
                 
-                render_temps(env->renderer,env->window, &texte_temps);
+                //render_temps(env->renderer,env->window, &texte_temps);
             } 
                 
             
@@ -226,7 +226,7 @@ Data_step  * step(int  * action,Env *env)
         int temps_restant = (int) floor(TEMPS-temps_de_jeu)/1000 +1;
         sprintf(temps_restant_char,"%d",temps_restant);
         strcat(texte_temps.text,temps_restant_char);
-        render_temps(env->renderer,env->window, &texte_temps);
+        //render_temps(env->renderer,env->window, &texte_temps);
     }else{
         // for (int i = 0; i < NB_PLAYERS; i++)
         //     {
@@ -238,7 +238,7 @@ Data_step  * step(int  * action,Env *env)
         //     printf("\n");
         strcat(texte_temps.text," ");  
                 
-        render_temps(env->renderer,env->window, &texte_temps);
+        //render_temps(env->renderer,env->window, &texte_temps);
           
     }
     

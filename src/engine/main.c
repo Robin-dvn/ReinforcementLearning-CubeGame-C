@@ -130,16 +130,16 @@ int main (int argc, char **argv)
                     fclose(file2);
                     break;
                 case SDLK_1:
-                    nb_map =0;
+                    //nb_map =0;
                     break;
                 case SDLK_2:
                     nb_map =1;
                     break;
                 case SDLK_3:
-                    nb_map =2;
+                    //nb_map =2;
                     break;
                 case SDLK_4:
-                    nb_map =3;
+                    //nb_map =3;
                     printf("ok");
                     break;
                 case SDLK_r:
