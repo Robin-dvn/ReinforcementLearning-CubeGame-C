@@ -1,5 +1,5 @@
 
-# RL pour un jeu simple 
+# Reinforcement Learning de zéro en C appliqué à un jeu simple 
 
 Dans le but de reproduire un jour ce qui est fait dans cette [vidéo](https://youtu.be/v3UBlEJDXR0?si=ilZV-3HeMnOmdmZ-) ytb ,
 j'ai essayer de dévellopper un jeu simple pour appliquer un algorithme de reinforcement learning. Le but étant d'appliquer la théorie. J'ai décidé de tout coder à partir de zéro afin de bien comprendre et de bien appliquer la théorie. J'ai choisi de faire ça en C, langage bas niveau que je maitrise le mieux.
