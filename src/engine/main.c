@@ -171,6 +171,9 @@ int main (int argc, char **argv)
         render_texte(renderer,window,&texte_mode,500);
         render_texte(renderer,window,&texte_param,550);
         SDL_RenderPresent(renderer);
+        SDL_DestroyTexture(texte_mode.texturee);
+        SDL_DestroyTexture(texte_param.texturee);
+
     }
     
     TTF_CloseFont(font);
@@ -178,8 +181,7 @@ int main (int argc, char **argv)
     free(textures_a_free);
     free(maps);
     SDL_DestroyTexture(texture_menu);
-    SDL_DestroyTexture(texte_mode.texturee);
-    SDL_DestroyTexture(texte_param.texturee);
+   
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     SDL_Quit();
