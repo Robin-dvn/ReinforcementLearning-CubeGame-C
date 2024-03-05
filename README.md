@@ -7,7 +7,7 @@ j'ai essayer de dévellopper un jeu simple pour appliquer un algorithme de reinf
 
 
 
-## Demo
+## Démo
 
 Démo du jeu en mode manuel:
 
@@ -45,18 +45,18 @@ J'ai choisi de représenter le modèle par le réseau de neuronnes suivant:
 - Layer 2; taille : 64; activation : tanh.
 - Output Layer; taille : 6; activation : softmax. (6 actions possibles ex:droite, gauche,sauter...)
 
-J'ai chosi ce modèle en prennant exemple des nombreux exemples que j'ai vu sur les réseaux de neuronnes. Ce choix est à discuter et j'ai du mal à le justifier. J'ai effectué ce projet en été 2023, aujourdh'ui, j'aurai choisi un modèle différent. Les résultats étant déja largement satisfaisant (pour moi), je n'ai pas essayé d'améliorer le modèle.
+J'ai choisi ce modèle en prennant exemple sur des nombreux exemples que j'ai vu sur les réseaux de neuronnes. Ce choix est à discuter et j'ai du mal à le justifier. J'ai effectué ce projet en été 2023, aujourd'hui, j'aurai choisi un modèle différent. Les résultats étant déjà largement satisfaisant (pour moi), je n'ai pas essayé d'améliorer le modèle.
 
 
 
 ## Entrainement
 
-Pour l'entrainement, j'ai choisi d'utiliser l'ADAMOptimizer pour la descente de gradient. Il a été difficile à coder mais il a porté ces fruits.
+Pour l'entrainement, j'ai choisi d'utiliser l'ADAMOptimizer pour la descente de gradient. Il a été difficile à coder mais il a porté ses fruits.
 
-En mode apprentissage, 20 cube jouent de manière automatique. Je prend ensuite le cube avec la meilleure récompense et je calcul le gradient basé sur son "parcours". 
+En mode apprentissage, 20 cubes jouent de manière automatique. Je prends ensuite le cube avec la meilleure récompense et je calcule le gradient basé sur son "parcours". 
 Les agents sont récompensés par rapport à la distance parcourue selon l'axe x. Il sont pénalisés si ils touchent un pique. Le système de récompense est dur à appréhender. Le choix de la récompense à été dur à faire et il mérite une amélioration.
 
-J'ai codé le jeu pour qu'il fasse 10 essais. Le modèle est mis à jour après chaque essaie. Une fois les 10 essais finis il faut relancer 10 essais pour continuer l'apprentissage.
+J'ai codé le jeu pour que les 20 agents jouent 10 "tours". Le modèle est mis à jour après chaque essaie. Une fois les 10 tours finis il faut relancer 10 tours pour continuer l'apprentissage.
 
 
 ## Résultats
@@ -85,7 +85,7 @@ Procédure :
 
 Paramètres par défault:
 
-Seul la map 2 est en accès, les autres maps ne sont pas optimisées. J'ai donc bloqué la fonctionnalité de changement de map. Ensuite, par défault il y a le mode apprentissage avec les weights de l'entrainement qui à conduit au gif résultat. 
+Seul la map 2 est accessible, les autres maps ne sont pas optimisées. J'ai donc bloqué la fonctionnalité de changement de map. Ensuite, par défault il y a le mode apprentissage avec les weights de l'entrainement qui à conduit au gif résultat. 
 
 Commandes:
 - Mode manuel : M
@@ -98,7 +98,7 @@ En mode Manuel:
 - saut : ESPACE
 
 
-NB 1: J'ai enlevé l'affichege du temps (qu'on peut voir sur les gifs), à cause de certains bugs qui font crasher le jeu. Le temps total de l'essai est de 7 secondes.
+NB 1: J'ai enlevé l'affichage du temps (qu'on peut voir sur les gifs), à cause de certains bugs qui font crasher le jeu. Le temps total d'un tour est de 7 secondes.
 
 NB 2: En mode apprentissage, le jeu est codé pour faire 10 essais, il revient ensuite sur le menu principal. Pour continuer l'entrainement il suffit de réappuyer sur ESPACE. 
 
@@ -107,10 +107,10 @@ NB 3: Il est possible que le jeu crash tout de même, si c'est le cas, les weigh
 ## Améliorations et critiques
 
 Voici les points qui sont à améliorer:
-- meilleur structure de code
+- meilleure structure de code
 - meilleur modèle pour l'agent
-- un système de reward plus intéligent
-- meilleur visualisation des résultats (metrics)
+- un système de reward plus intelligent
+- meilleure visualisation des résultats (metrics)
 
-Mon manque d'expérience et de théorie fait qu'il ya beaucoup de point à revoir. Surtout sur l'analyse du réseau de neuronnes et la théorie mathématique derrière l'apprentissage agent-environnement.
+Mon manque d'expérience et de théorie fait qu'il y a beaucoup de points à revoir. Surtout sur l'analyse du réseau de neuronnes et la théorie mathématique derrière l'apprentissage agent-environnement.
 
