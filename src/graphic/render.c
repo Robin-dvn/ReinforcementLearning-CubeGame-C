@@ -212,7 +212,7 @@ void jouer(SDL_Window *window,SDL_Renderer * renderer,SDL_Texture * texture_menu
             
                 
             }
-            printf("apres le done");
+            
             for (int i = 0; i < NB_PLAYERS; i++)
             {
                 APPEND_ListeFloat(env->liste_players[i]->max_x,&posx);
@@ -294,13 +294,13 @@ void jouer(SDL_Window *window,SDL_Renderer * renderer,SDL_Texture * texture_menu
                 
             }
             
-            printf("fin episode");
+            
             
 
         }
         // PRINT_Matrice(policy->layers[policy->nb_layers-2].weights);
         // PRINT_Vecf(policy->layers[policy->nb_layers-2].biases);
-        printf("avant sauv params");
+        
         sauvegarder_params(policy,"../src/policy_params/sauv4.txt");
         
         sauvegarder_momentum(policy,"../src/policy_params/moment1.txt");
