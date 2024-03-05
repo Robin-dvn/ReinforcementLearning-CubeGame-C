@@ -2,7 +2,7 @@
 # Reinforcement Learning de zéro en C appliqué à un jeu simple 
 
 Dans le but de reproduire un jour ce qui est fait dans cette [vidéo](https://youtu.be/v3UBlEJDXR0?si=ilZV-3HeMnOmdmZ-) ytb ,
-j'ai essayer de dévellopper un jeu simple pour appliquer un algorithme de reinforcement learning. Le but étant d'appliquer la théorie. J'ai décidé de tout coder à partir de zéro afin de bien comprendre et de bien appliquer la théorie. J'ai choisi de faire ça en C, langage bas niveau que je maitrise le mieux.
+j'ai essayé de développer un jeu simple pour appliquer un algorithme de reinforcement learning. Le but étant d'appliquer la théorie. J'ai décidé de tout coder à partir de zéro afin de bien comprendre et de bien appliquer la théorie. J'ai choisi de faire ça en C, langage bas niveau que je maitrise le mieux.
 
 
 
@@ -20,7 +20,7 @@ Démo du jeu en mode apprentissage:
 
 
 ## References
-Pour apprendre la théorie du RL je me suis basé sur le cours de David Silver proposé par google deep mind [deep mind](https://youtube.com/playlist?list=PLqYmG7hTraZDM-OYHWgPebj2MfCFzFObQ&si=nTdWduHzlCDsnJc5) sur ytb ainsi que de nombreux post du site [medium](https://medium.com/)
+Pour apprendre la théorie du RL je me suis basé sur le cours de David Silver proposé par google [deep mind](https://youtube.com/playlist?list=PLqYmG7hTraZDM-OYHWgPebj2MfCFzFObQ&si=nTdWduHzlCDsnJc5) sur ytb ainsi que de nombreux post du site [medium](https://medium.com/).
 
 
 ## La structure
@@ -90,8 +90,8 @@ Seul la map 2 est accessible, les autres maps ne sont pas optimisées. J'ai donc
 Commandes:
 - Mode manuel : M
 - Mode apprentissage : R
-- Reset les weight : 0 (attention,les weights de l'apprentissage seront perdu)
-- Commancer: ESPACE
+- Reset les weight : 0 (attention,les weights de l'apprentissage seront perdus)
+- Commencer: ESPACE
 
 En mode Manuel:
 - directions: flèches droite et gauche
